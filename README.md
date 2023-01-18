@@ -1,25 +1,28 @@
-# Rollup Typescript Boilerplate
+# React useAsyncRef hook
 
-[![CI](https://github.com/xg4/rollup-typescript-boilerplate/workflows/CI/badge.svg)](https://github.com/xg4/rollup-typescript-boilerplate/actions)
-[![codecov](https://img.shields.io/codecov/c/github/xg4/rollup-typescript-boilerplate.svg)](https://codecov.io/gh/xg4/rollup-typescript-boilerplate)
-[![GitHub](https://img.shields.io/github/license/xg4/rollup-typescript-boilerplate.svg)](https://github.com/xg4/rollup-typescript-boilerplate/blob/master/LICENSE)
+- this hook works exactly like useRef hook, but it has an additional field called `asyncCurrent`
+- that returns a promise, that gets resolved when the ref gets a value other than null | undefined.
 
-## Installation
+example usage:
 
-```bash
-$ git clone git@github.com:xg4/rollup-typescript-boilerplate.git <your project name>
-# or
-$ git clone https://github.com/xg4/rollup-typescript-boilerplate <your project name>
-
-$ cd <your project name>
-$ rm -rf .git
-$ git init
-$ git remote add origin <your git repo>
-$ git add .
-$ git commit -m "Initial commit"
-$ git push -u origin master
+```tsx
+const Component = () => {
+  const nameRef = useAsyncRef<HTMLInputElement>(null)
+  const descRef = useAsyncRef<HTMLInputElement>(null)
+  const submit = async () => {
+    const textCurrent = await nameRef.asyncCurrent
+    const text2Current = await descRef.asyncCurrent
+    console.log('name', textCurrent.value)
+    console.log('desc', text2Current.value)
+  }
+  return (
+    <div>
+      <p>name</p>
+      <input className="text-black" ref={nameRef} type="text" />
+      <p>desc</p>
+      <input className="text-black" ref={descRef} type="text" />
+      <button onClick={submit}>submit</button>
+    </div>
+  )
+}
 ```
-
-## LICENSE
-
-MIT
