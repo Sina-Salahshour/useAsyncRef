@@ -6,6 +6,8 @@
 example usage:
 
 ```tsx
+import { useAsyncRef } from 'use-async-ref'
+
 const Component = () => {
   const nameRef = useAsyncRef<HTMLInputElement>(null)
   const descRef = useAsyncRef<HTMLInputElement>(null)
