@@ -2,6 +2,7 @@
 
 - this hook works exactly like useRef hook, but it has an additional field called `asyncCurrent`
 - that returns a promise, that gets resolved when the ref gets a value other than null | undefined.
+- this way, you don't need to handle states where the ref value is null, and just wait for ref to be available.
 
 example usage:
 
